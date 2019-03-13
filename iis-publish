@@ -1,0 +1,11 @@
+mkdir "%WORKSPACE%"
+cd "%WORKSPACE%"
+dotnet build "%WORKSPACE%"
+
+cd "%WORKSPACE%\Imagine.Learn.WebApi"
+dotnet publish -o "%WORKSPACE%\%BUILD_NUMBER%"
+
+
+C:\Windows\System32\inetsrv\appcmd.exe stop apppool /apppool.name:".NetCore"
+xcopy "%WORKSPACE%\%BUILD_NUMBER%" "D:\Application\Learn" /s /y
+C:\Windows\System32\inetsrv\appcmd.exe start apppool /apppool.name:".NetCore"
